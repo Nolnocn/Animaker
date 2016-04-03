@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <title>The Animaker</title>
+        <link rel="shortcut icon" href="images/icon.ico">
+        <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        
+        <!-- It would be cool if this worked in browsers besides firefox -->
+        <!--<menu type="context" id="workAreaMenu">
+            <menuitem label="Bring to Front"></menuitem>
+            <menuitem label="Send to Back"></menuitem>
+            <menuitem label="Bring Forward"></menuitem>
+            <menuitem label="Send Backward"></menuitem>
+        </menu>-->
+    </head>
+    
+    <body>
+        <h1>The Animaker</h1>
+        
+        <!-- WorkArea Canvas -->
+        <canvas class="section" id="workArea" width='480' height='320' contextmenu="workAreaMenu">Uh oh...</canvas>
+        
+        <!-- Controls -->
+        <div class="section" id="controlPanel">
+            <!-- Playback controls -->
+            <div class="controls">
+                <input type="button" id="backwardButton" value="<<">
+                <input type="button" id="playButton" value=">">
+                <!--<button type="button"><img src="images/icon.ico" width="100px" height="100px"></button>-->
+                <input type="button" id="forwardButton" value=">>">
+                <label for="loopCheckbox">Loop</label>
+                <input type="checkbox" id="loopCheckbox"><br>
+                <label for="framerate">Frames Per Second</label>
+                <input type="number" id="framerate" value="12" min="1" max="60">
+            </div>
+            <!-- WorkArea controls -->
+            <div class="controls">
+                <input type="button" id="addButton" value="Add Frame">
+                <input type="button" id="clearButton" value="Clear Frame">
+                <input type="button" id="removeButton" value="Remove Frame">
+            </div>
+        </div>
+        
+        <!-- Timeline Canvas -->
+        <canvas class="section" id="timeline" width='720' height='100'>Trouble...</canvas>
+        
+        <!-- Credits -->
+        <p id="credits">By: Andrew Ahlquist & Nick Conlon</p>
+        
+        <!-- Scripts -->
+        <script src="js/loader.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/frame.js"></script>
+        <script src="js/import.js"></script>
+        <script src="js/playback.js"></script>
+        <script src="js/animaker.js"></script>
+        <script src="js/workArea.js"></script>
+        <script src="js/frameImage.js"></script>
+        <script src="js/scrollbar.js"></script>
+    </body>
+    
+</html>
