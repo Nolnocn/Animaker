@@ -4,6 +4,7 @@
 
 var app = app || {};
 
+// allows for scollification
 app.scrollbar = {
     x: undefined,
     y: undefined,
@@ -20,6 +21,7 @@ app.scrollbar = {
     dragging: false,
     mouseOffset: undefined,
     
+    // initialize
     init: function(x, y, w, h) {
         this.x = x;
         this.y = y;
@@ -34,15 +36,14 @@ app.scrollbar = {
         this.bgColor = 'rgba(200, 200, 200, .8)';
         this.value = 0;
         
+        // binding for my sanity
         this.scaleBox.bind(this);
         this.checkifClicked.bind(this);
         this.released.bind(this);
         this.constrainToMouse.bind(this);
     },
     
-    update: function() {
-    },
-    
+    // draws the scrollbar
     draw: function(ctx) {
         ctx.save();
         ctx.fillStyle = this.bgColor;
@@ -57,6 +58,7 @@ app.scrollbar = {
         ctx.restore();
     },
     
+    // scales the width of the box based on the amount of content
     scaleBox: function(amt) {
         if(amt <= 10) {
             this.boxWidth = this.width;
@@ -68,6 +70,7 @@ app.scrollbar = {
         }
     },
     
+    // calaculates the value based on the position of the box
     calculateValue: function() {
         this.value = (this.boxX - this.x) / (this.x + this.width - this.boxWidth);
         if(this.boxX == this.x + this.width - this.boxWidth) {
@@ -75,6 +78,7 @@ app.scrollbar = {
         }
     },
     
+    // checks if the box is clicked
     checkifClicked: function(mouse) {
         if(mouse.x > this.boxX && mouse.x < this.boxX + this.boxWidth 
            && mouse.y > this.boxY && mouse.y < this.boxY + this.boxHeight) {
@@ -83,10 +87,12 @@ app.scrollbar = {
         }
     },
     
+    // stops dragging when the box is released
     released: function() {
         this.dragging = false;
     },
     
+    // constrains the x position of the box to the mouse and clamps it within the bar length
     constrainToMouse: function(mouse) {
         if(this.dragging) {
             this.boxX = Math.min(this.x + this.width - this.boxWidth, Math.max(this.x, mouse.x - this.mouseOffset));

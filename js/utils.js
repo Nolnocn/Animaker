@@ -22,4 +22,4 @@ app.utils = function(){
     return{
 		getMouse : getMouse
 	};
-}();
+}(); 

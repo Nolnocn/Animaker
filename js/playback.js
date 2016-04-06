@@ -28,12 +28,32 @@ app.playback = {
         document.querySelector("#playButton").onclick = this.togglePlay.bind(this);
         
         var that = this;
+        // back button
         document.querySelector("#backwardButton").onclick = function() {
             that.setSelectedFrame(that.playIndex - 1);
         };
+        document.querySelector("#backwardButton").onmousedown = function() {
+            document.querySelector("#backwardButtonImg").src = "images/buttonRewindClicked.png";
+        };
+        document.querySelector("#backwardButton").onmouseup = function() {
+            document.querySelector("#backwardButtonImg").src = "images/buttonRewind.png";
+        };
+        document.querySelector("#backwardButton").onmouseout = function() {
+            document.querySelector("#backwardButtonImg").src = "images/buttonRewind.png";
+        };
         
+        // forward button
         document.querySelector("#forwardButton").onclick = function() {
             that.setSelectedFrame(that.playIndex + 1);
+        };
+        document.querySelector("#forwardButton").onmousedown = function() {
+            document.querySelector("#forwardButtonImg").src = "images/buttonFastForwardClicked.png";
+        };
+        document.querySelector("#forwardButton").onmouseup = function() {
+            document.querySelector("#forwardButtonImg").src = "images/buttonFastForward.png";
+        };
+        document.querySelector("#forwardButton").onmouseout = function() {
+            document.querySelector("#forwardButtonImg").src = "images/buttonFastForward.png";
         };
         
         document.querySelector("#loopCheckbox").onchange = function(e) {
@@ -55,13 +75,17 @@ app.playback = {
             e.preventDefault();
             var mouse = that.utils.getMouse(e);
             that.scrollbar.constrainToMouse(mouse);
+            
             if(that.scrollbar.dragging) {
                 var i = 30 + 6 * that.playIndex + 60 * that.playIndex - that.scrollbar.value * (that.frames.length-10) * 66;
+                // if the selected frame is off screen, change the selected frame
                 if(i < 0) {
                     that.playIndex++;
+                    that.workArea.loadFrame(that.frames[that.playIndex]);
                 }
                 else if(i > that.canvas.width - 60) {
                     that.playIndex--;
+                    that.workArea.loadFrame(that.frames[that.playIndex]);
                 }
             }
         }, false);
@@ -166,12 +190,33 @@ app.playback = {
         
         // change the play button appearance
         if(!this.playing) {
-            document.querySelector('#playButton').value = ">";
+            document.querySelector('#playButtonImg').src = "images/buttonPlay.png";
+            
+            document.querySelector("#playButton").onmousedown = function() {
+                document.querySelector("#playButtonImg").src = "images/buttonPlayClicked.png";
+            };
+            document.querySelector("#playButton").onmouseup = function() {
+                document.querySelector("#playButtonImg").src = "images/buttonPlay.png";
+            };
+            document.querySelector("#playButton").onmouseout = function() {
+                document.querySelector("#playButtonImg").src = "images/buttonPlay.png";
+            };
+            
             // load the current frame when playback is stopped
             this.workArea.loadFrame(this.frames[this.playIndex]);
         }
         else {
-            document.querySelector('#playButton').value = "| |";
+            document.querySelector('#playButtonImg').src = "images/buttonPause.png";
+            
+            document.querySelector("#playButton").onmousedown = function() {
+                document.querySelector("#playButtonImg").src = "images/buttonPauseClicked.png";
+            };
+            document.querySelector("#playButton").onmouseup = function() {
+                document.querySelector("#playButtonImg").src = "images/buttonPause.png";
+            };
+            document.querySelector("#playButton").onmouseout = function() {
+                document.querySelector("#playButtonImg").src = "images/buttonPause.png";
+            };
         }
     },
     

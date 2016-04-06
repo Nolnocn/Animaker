@@ -24,7 +24,7 @@ app.workArea = {
     startX: undefined,
     startY: undefined,
     selectedIndex: undefined,
-    onionSkin: true,
+    onionSkin: false,
     
     // initialize
     init: function() {
@@ -34,9 +34,43 @@ app.workArea = {
         this.HEIGHT = this.canvas.height;
         
         // set up button controls
+        //add frame
         document.querySelector("#addButton").onclick = this.createNewFrame.bind(this);
+        document.querySelector("#addButton").onmousedown = function() {
+            document.querySelector("#addButtonImg").src = "images/buttonAddFrameClicked.png";
+        };
+        document.querySelector("#addButton").onmouseup = function() {
+            document.querySelector("#addButtonImg").src = "images/buttonAddFrame.png";
+        };
+        document.querySelector("#addButton").onmouseout = function() {
+            document.querySelector("#addButtonImg").src = "images/buttonAddFrame.png";
+        };
+        
+        //clear frame
         document.querySelector("#clearButton").onclick = this.clearWorkArea.bind(this);
+        document.querySelector("#clearButton").onmousedown = function() {
+            document.querySelector("#clearButtonImg").src = "images/buttonClearFrameClicked.png";
+        };
+        document.querySelector("#clearButton").onmouseup = function() {
+            document.querySelector("#clearButtonImg").src = "images/buttonClearFrame.png";
+        };
+        document.querySelector("#clearButton").onmouseout = function() {
+            document.querySelector("#clearButtonImg").src = "images/buttonClearFrame.png";
+        };
+        
+        //remove frame
         document.querySelector("#removeButton").onclick = this.removeFrame.bind(this);
+        document.querySelector("#removeButton").onmousedown = function() {
+            document.querySelector("#removeButtonImg").src = "images/buttonRemoveFrameClicked.png";
+        };
+        document.querySelector("#removeButton").onmouseup = function() {
+            document.querySelector("#removeButtonImg").src = "images/buttonRemoveFrame.png";
+        };
+        document.querySelector("#removeButton").onmouseout = function() {
+            document.querySelector("#removeButtonImg").src = "images/buttonRemoveFrame.png";
+        };
+        
+        document.querySelector("#onionCheckbox").onchange = this.toggleOnionSkin.bind(this);
         
         this.setupMouseEvents();
     },
@@ -120,15 +154,17 @@ app.workArea = {
         }
     },
     
+    // enables single axis constraint when moving a frameImage
     enableConstrain: function() {
         this.constrainAxis = true;
     },
     
+    // disables single axis constraint when moving a frameImage
     disableConstrain: function() {
         this.constrainAxis = false;
     },
     
-    //
+    // deselects the selected image
     releaseSelectedImage: function(deselect) {
         if(this.selectedImage) {
             this.dragging = false;
@@ -141,6 +177,7 @@ app.workArea = {
         }
     },
     
+    // changes the drawing order of the selected image by a mode
     changeSortingOrder: function(mode) {
         if(this.selectedImage) {
             switch(mode) {
@@ -164,12 +201,14 @@ app.workArea = {
         }
     },
     
+    // deletes selected image
     deleteSelectedImage: function() {
         this.images.splice(this.selectedIndex, 1);
         this.releaseSelectedImage(true);
         this.playback.updateThumbnails();
     },
     
+    // sets the index of a the selected image's draw order
     setImageOrder: function(newIndex) {
         this.images.splice(this.selectedIndex, 1);
         this.images.splice(newIndex, 0, this.selectedImage);
@@ -178,6 +217,7 @@ app.workArea = {
         this.playback.updateThumbnails();
     },
     
+    // moves the selected image by x and y
     nudge: function(x, y) {
         this.selectedImage.x += x;
         this.selectedImage.y += y;
@@ -324,5 +364,10 @@ app.workArea = {
         if(!pb.playing) {
             pb.removeFrame(this.playback.playIndex);
         }
+    },
+    
+    // toggles onion skin display on and off
+    toggleOnionSkin: function() {
+        this.onionSkin = !this.onionSkin;
     }
 };

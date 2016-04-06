@@ -28,10 +28,9 @@
         <div class="section" id="controlPanel">
             <!-- Playback controls -->
             <div class="controls">
-                <input type="button" id="backwardButton" value="<<">
-                <input type="button" id="playButton" value=">">
-                <!--<button type="button"><img src="images/icon.ico" width="100px" height="100px"></button>-->
-                <input type="button" id="forwardButton" value=">>">
+                 <button type="button" id="backwardButton"><img id="backwardButtonImg" src="images/buttonRewind.png" width="80px" height="30px" draggable="false"></button>
+                <button type="button" id="playButton"><img id="playButtonImg" src="images/buttonPlay.png" width="40px" height="30px" draggable="false"></button>
+                <button type="button" id="forwardButton"><img id="forwardButtonImg" src="images/buttonFastForward.png" width="80px" height="30px" draggable="false"></button>
                 <label for="loopCheckbox">Loop</label>
                 <input type="checkbox" id="loopCheckbox"><br>
                 <label for="framerate">Frames Per Second</label>
@@ -39,9 +38,11 @@
             </div>
             <!-- WorkArea controls -->
             <div class="controls">
-                <input type="button" id="addButton" value="Add Frame">
-                <input type="button" id="clearButton" value="Clear Frame">
-                <input type="button" id="removeButton" value="Remove Frame">
+                <button type="button" id="addButton"><img id="addButtonImg" src="images/buttonAddFrame.png" width="80px" height="30px" draggable="false"></button>
+                <button type="button" id="clearButton"><img id="clearButtonImg" src="images/buttonClearFrame.png" width="80px" height="30px" draggable="false"></button>
+                <button type="button" id="removeButton"><img id="removeButtonImg" src="images/buttonRemoveFrame.png" width="80px" height="30px" draggable="false"></button>
+                <label for="onionCheckbox">Onion Skin</label>
+                <input type="checkbox" id="onionCheckbox"><br>
             </div>
         </div>
         
@@ -49,7 +50,10 @@
         <canvas class="section" id="timeline" width='720' height='100'>Trouble...</canvas>
         
         <!-- Credits -->
-        <p id="credits">By: Andrew Ahlquist & Nick Conlon</p>
+        <p>By: Andrew Ahlquist & Nick Conlon</p>
+        
+        <!-- Instructions -->
+        <a href="instructions.pdf" target="_blank">Instructions</a>
         
         <!-- Scripts -->
         <script src="js/loader.js"></script>
